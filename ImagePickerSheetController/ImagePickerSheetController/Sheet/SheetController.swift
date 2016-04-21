@@ -51,8 +51,9 @@ private let defaultInset: CGFloat = 10
     
     // MARK: - Initialization
     
-    init(previewCollectionView: PreviewCollectionView) {
+    init(previewCollectionView: PreviewCollectionView, displayPreview: Bool) {
         self.previewCollectionView = previewCollectionView
+        self.displayPreview = displayPreview;
         
         super.init()
     }

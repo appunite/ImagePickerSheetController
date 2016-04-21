@@ -42,7 +42,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             self.presentViewController(controller, animated: true, completion: nil)
         }
         
-        let controller = ImagePickerSheetController(mediaType: .None)
+        let libraryStatus: PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+    
+        
+        var type: ImagePickerMediaType = .Image;
+        
+        if libraryStatus == .Denied ||  libraryStatus == .Restricted {
+            type = .None
+        }
+        
+        let controller = ImagePickerSheetController(mediaType: type)
         controller.maximumSelection = 3
         
         controller.addAction(ImagePickerAction(title: NSLocalizedString("Take Photo Or Video", comment: "Action Title"), secondaryTitle:nil, handler: { _ in
