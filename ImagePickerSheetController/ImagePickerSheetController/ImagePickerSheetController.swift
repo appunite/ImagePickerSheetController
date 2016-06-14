@@ -34,7 +34,7 @@ public class ImagePickerSheetController: UIViewController {
             view.backgroundColor = UIColor(white: 0.0, alpha: 0.3961)
         }
         
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "cancel"))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ImagePickerSheetController.cancel)))
         
         return view
     }()
@@ -171,7 +171,7 @@ public class ImagePickerSheetController: UIViewController {
         modalPresentationStyle = .Custom
         transitioningDelegate = self
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "cancel", name: UIApplicationDidEnterBackgroundNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ImagePickerSheetController.cancel), name: UIApplicationDidEnterBackgroundNotification, object: nil)
     }
     
     deinit {
@@ -345,7 +345,7 @@ public class ImagePickerSheetController: UIViewController {
                 if let imageURL : NSURL = self.saveImageOnDisk(image!) {
                     assetsURL.append(imageURL)
                     
-                    count++;
+                    count = count + 1;
                     if (self.selectedImageAssets.count == count){
                         completion(urls: assetsURL);
                     }
